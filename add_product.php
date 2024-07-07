@@ -20,7 +20,7 @@ include("./includes/head.php")
         </div>
         <div class="row">
             <div class="col">
-                <form name="form1" method="POST" action="insert_product.php" enctype="multipart/form-data">
+                <form name="form" method="POST" action="insert_product.php" enctype="multipart/form-data">
                     <label>Product Name</label>
                     <input type="text" name="product_name" class="form-control" placeholder="product name" required />
                     <br />

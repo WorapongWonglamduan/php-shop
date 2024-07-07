@@ -22,7 +22,7 @@ include("./includes/head.php")
         <div class="alert alert-primary h4 mt-4" role="alert">
             List Products
         </div>
-        <a href="add_product.php" role="button" class="btn btn-primary mb-4">add product</a>
+        <a href="add_product.php" role="button" class="btn btn-primary mb-4">Add +</a>
         <table class="table table-striped">
             <tr>
                 <th>
@@ -43,6 +43,12 @@ include("./includes/head.php")
                 <th>
                     Images
                 </th>
+                <th>
+                    Edit
+                </th>
+                <th>
+                    Delete
+                </th>
             </tr>
             <?php while ($product = mysqli_fetch_assoc($query)) :
             ?>
@@ -52,7 +58,9 @@ include("./includes/head.php")
                     <td><?php echo $product['category_name'] ?></td>
                     <td><?php echo $product['price'] ?></td>
                     <td><?php echo $product['amount'] ?></td>
-                    <td><img src="<?php echo $product['images'] ?>" width="80px" height="80px" style="object-fit: contain;" /></td>
+                    <td><img src="<?php echo $uploadsPath . $product['images'] ?>" width="80px" height="80px" style="object-fit: contain;" /></td>
+                    <td><a href="edit_product.php?id=<?php echo $product['product_id'] ?>">Edit</a></td>
+                    <td><a href="#">Delete</a></td>
                 </tr>
             <?php
             endwhile; ?>

@@ -18,7 +18,7 @@ if (!file_exists($uploads)) {
 
 // Move the uploaded file to the uploads directory
 if (move_uploaded_file($image_tmp, $new_images)) {
-    $sql = "INSERT INTO products(product_name,category_id,price,amount,images) VALUES('$product_name','$category_id','$price','$amount','$new_images')";
+    $sql = "INSERT INTO products(product_name,category_id,price,amount,images) VALUES('$product_name','$category_id','$price','$amount','$image')";
     $query = mysqli_query($conn, $sql);
     if ($query) {
         echo "<script>alert('Add Product Successful');</script>";
