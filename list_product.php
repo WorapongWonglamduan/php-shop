@@ -15,6 +15,9 @@ $rows = mysqli_num_rows($query);
 <?php
 include("./includes/head.php")
 ?>
+<?php
+include("./includes/navbar.php")
+?>
 
 
 <body>

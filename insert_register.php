@@ -19,7 +19,8 @@ $result = mysqli_query($conn, $sql);
 if ($result) {
     echo "<script>alert('save successful')</script>";
     echo "<script> window.location='register.php'</script>";
-} else {
+}
+else {
     echo "Error:" . $sql . "<br/>" . mysqli_error($conn);
     echo "<script> window.location='register.php'</script>";
 }

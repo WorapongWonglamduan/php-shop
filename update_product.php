@@ -22,7 +22,8 @@ if (!file_exists($uploads)) {
 // Move the uploaded file to the uploads directory
 if (!empty($image) && move_uploaded_file($image_tmp, $new_images)) {
     $image = $image;
-} else {
+}
+else {
     $image = $old_images;
 }
 
@@ -31,6 +32,7 @@ $query = mysqli_query($conn, $sql);
 if ($query) {
     echo "<script>alert('Update Product Successful');</script>";
     echo "<script>window.location = 'list_product.php';</script>";
-} else {
+}
+else {
     echo "<script>alert('Update Product Fail');</script>";
 }

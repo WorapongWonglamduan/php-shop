@@ -24,18 +24,20 @@ if ($row > 0) {
     $_SESSION['lastname'] = $row['lastname'];
     $_SESSION['roles'] = $row['roles'];
     if ($roles == '2') {
-        $show =  header("location: index.php");
-    } else {
-        $show =  header("location: admin.php");
+        $show = header("location: index.php");
+    }
+    else {
+        $show = header("location: admin.php");
     }
 
     // Redirect to index.php on successful login
 
     exit;
-} else {
+}
+else {
     // If no row was found, redirect with an error message
     $_SESSION["Error"] = "<p>Your username or password is invalid</p>";
-    $show =  header("location: login.php");
+    $show = header("location: login.php");
     exit;
 }
-echo $show;
+// echo $show;
