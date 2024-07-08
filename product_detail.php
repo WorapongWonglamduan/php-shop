@@ -28,7 +28,7 @@ include('./includes/navbar.php');
                 <h6 style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; font-weight: bold;"><?php echo $product['product_name']; ?></h6>
                 <h7><?php echo $product['product_detail']; ?></h7>
                 <div>Price: <?php echo number_format($product['price'], 2); ?> ฿</div>
-                <a href="#" class="btn btn-outline-success">Add cart</a>
+                <a href="order.php?id=<?php echo $product['product_id'] ?>" class="btn btn-outline-success">Add cart</a>
             </div>
         </div>
     </div>
