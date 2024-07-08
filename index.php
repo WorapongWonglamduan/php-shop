@@ -6,6 +6,7 @@ session_start();
 $sql = "SELECT * FROM products";
 $query = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -18,6 +19,8 @@ include("./includes/navbar.php");
 <body>
   <div class="container">
     <div class="row mt-4">
+
+      <!-- display -->
       <?php
       $perpage = 6;
       if (isset($_GET['page'])) {
@@ -26,30 +29,36 @@ include("./includes/navbar.php");
         $page = 1;
       }
       $start = ($page - 1) * $perpage;
-      $sql = "SELECT * FROM products ORDER BY product_id LIMIT {$start}, {$perpage}";
+
+      $keyword = @$_POST['keyword'];
+      if ($keyword != '') {
+        $sql = "SELECT * FROM products WHERE product_id='$keyword' OR product_name like'%$keyword%' OR price <= '$keyword'  ORDER BY product_id LIMIT {$start}, {$perpage}";
+      } else {
+        $sql = "SELECT * FROM products ORDER BY product_id LIMIT {$start}, {$perpage}";
+      }
       $queryProduct = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
-      while ($product = mysqli_fetch_assoc($queryProduct)) {
+      while ($product = mysqli_fetch_assoc($queryProduct)) :
         $price = $product["price"];
       ?>
-        <div class="col-md-4 mb-4 p-4">
+        <div class="col-md-4 mb-4 p-4 text-center">
           <img src="<?php echo $uploadsPath . $product['images']; ?>" width="200" height="250" style="object-fit: cover;">
           <br />
           <div>Product ID: <?php echo $product['product_id']; ?></div>
-          <h6 style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; font-weight: bold;"><?php echo $product['product_name']; ?></h6>
+          <div style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; font-weight: bold;"><?php echo $product['product_name']; ?></div>
           <div>Price: <?php echo number_format($product['price'], 2); ?> ฿</div>
-          <a href="#" class="btn btn-info">Add</a>
+          </br>
+          <a href="product_detail.php?id=<?php echo $product['product_id'] ?>" class="btn btn-outline-success">Details</a>
         </div>
-      <?php } ?>
+      <?php endwhile; ?>
     </div>
     <!-- end row -->
 
     <?php
-    $sqlProductCount = "SELECT COUNT(*) AS total FROM products";
-    $resultProductCount = mysqli_query($conn, $sqlProductCount);
-    $rowProductCount = mysqli_fetch_assoc($resultProductCount);
-    $totalProducts = $rowProductCount['total'];
-    $total_page = ceil($totalProducts / $perpage);
+    $sqlProductAll = "SELECT * FROM products";
+    $resultProductCount = mysqli_query($conn, $sqlProductAll);
+    $totalProducts = mysqli_num_rows($resultProductCount); // Count total rows
+    $total_page = ceil($totalProducts / $perpage); // Calculate total pages
     ?>
 
     <nav aria-label="Page navigation example">
