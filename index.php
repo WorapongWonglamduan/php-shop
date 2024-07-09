@@ -1,6 +1,7 @@
 <?php
 include("condb.php");
 include("config.php");
+
 session_start();
 
 $sql = "SELECT * FROM products";
@@ -80,4 +81,5 @@ include("./includes/navbar.php");
 
 </html>
 
-<?php mysqli_close($conn); ?>
+<?php
+mysqli_close($conn); ?>
