@@ -47,7 +47,7 @@ include('config.php')
                                     $sqlOrders = "SELECT * FROM orders ORDER BY date_time DESC";
                                     $queryOrders  = mysqli_query($conn, $sqlOrders);
                                     while ($rowOrders = mysqli_fetch_array($queryOrders)) :
-                                        echo $rowOrders["orders_status"];
+
                                         switch ($rowOrders['orders_status']) {
                                             case 1:
                                                 $strStatus = 'Order Placed';
