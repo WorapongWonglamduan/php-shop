@@ -98,7 +98,7 @@ $statusOptions = [
                                                         <input type="hidden" name="orders_id" value="<?= $rowOrders['orders_id'] ?>">
                                                         <select name="orders_status" class="form-control" onchange="this.form.submit()">
                                                             <?php foreach ($statusOptions as $value => $label) : ?>
-                                                                <option value="<?= $value ?>" <?= ($rowOrders['orders_status'] == $value) ? 'selected' : '' ?>>
+                                                                <option value="<?= $value ?>" <?= ($value == 7) ? 'disabled' : '' ?> <?= ($rowOrders['orders_status'] == $value) ? 'selected' : '' ?>>
                                                                     <?= $label ?>
                                                                 </option>
                                                             <?php endforeach; ?>
