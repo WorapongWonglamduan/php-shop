@@ -11,6 +11,7 @@ $phone = $_POST["phone"];
 $qsl = "INSERT INTO orders (firstname, lastname, address, phone, total_price, orders_status) VALUES ('$firstname', '$lastname', '$address', '$phone', '" . $_SESSION['total_price'] . "', '1')";
 $query = mysqli_query($conn, $qsl);
 $orderId = mysqli_insert_id($conn);
+$_SESSION['order_id'] = $orderId;
 
 $total_price = 0;
 
@@ -32,6 +33,10 @@ for ($i = 0; $i <= (int)$_SESSION["intLine"]; $i++) {
 }
 
 mysqli_close($conn);
-session_destroy();
+unset($_SESSION["intLine"]);
+unset($_SESSION["strProductID"]);
+unset($_SESSION["strQty"]);
+unset($_SESSION["total_price"]);
+// session_destroy();
 echo '<script>alert("Insert Successful")</script>';
-header("location: index.php");
+header("location: print_order.php");

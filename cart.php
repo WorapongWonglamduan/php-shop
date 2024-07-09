@@ -37,42 +37,45 @@ include('./includes/navbar.php');
                             $total = 0;
                             $totalPrice = 0;
                             $m = 1;
-                            for ($i = 0; $i <= (int)$_SESSION["intLine"]; $i++) :
 
-                                if ($_SESSION["strProductID"][$i] != "") {
-                                    $sql1 = "SELECT * FROM products WHERE product_id = '" . $_SESSION["strProductID"][$i] . "' ";
-                                    $query1 = mysqli_query($conn, $sql1);
-                                    $rowsProducts = mysqli_fetch_array($query1);
+                            if (isset($_SESSION["intLine"])) :
+                                for ($i = 0; $i <= (int)$_SESSION["intLine"]; $i++) :
 
-                                    $_SESSION['price'] =  $rowsProducts['price'];
-                                    $total = $_SESSION["strQty"][$i];
-                                    $sum = $total * $rowsProducts['price'];
-                                    $sumPrice = number_format($sum);
-                                    $price = number_format($rowsProducts['price']);
-                                    $totalPrice += $sum;
-                                    $_SESSION['total_price'] = $totalPrice;
+                                    if ($_SESSION["strProductID"][$i] != "") {
+                                        $sql1 = "SELECT * FROM products WHERE product_id = '" . $_SESSION["strProductID"][$i] . "' ";
+                                        $query1 = mysqli_query($conn, $sql1);
+                                        $rowsProducts = mysqli_fetch_array($query1);
+
+                                        $_SESSION['price'] =  $rowsProducts['price'];
+                                        $total = $_SESSION["strQty"][$i];
+                                        $sum = $total * $rowsProducts['price'];
+                                        $sumPrice = number_format($sum);
+                                        $price = number_format($rowsProducts['price']);
+                                        $totalPrice += $sum;
+                                        $_SESSION['total_price'] = $totalPrice;
 
                             ?>
-                                    <tr>
-                                        <td><?php echo $m ?></td>
-                                        <td><img src="<?php echo $uploadsPath . $rowsProducts['images'] ?>" width='80px' height="100px" alt="sale-shop" style="object-fit: cover" class="border"></td>
-                                        <td><?php echo $rowsProducts['product_id'] ?></td>
-                                        <td><?php echo $rowsProducts['product_name'] ?></td>
-                                        <td><?php echo $price ?></td>
-                                        <td><?php echo $_SESSION["strQty"][$i] ?></td>
-                                        <td><a href="order.php?id=<?php echo $rowsProducts['product_id']  ?>" class="btn btn-outline-primary me-2">+</a>
-                                            <?php if ($_SESSION["strQty"][$i] > 1) : ?>
-                                                <a href="order_del.php?id=<?php echo $rowsProducts['product_id']  ?>" class="btn btn-outline-danger">-</a>'
-                                            <?php endif ?>
-                                        </td>
-                                        <td><?php echo $sumPrice ?></td>
-                                        <td> <a href="delete_cart.php?id=<?php echo $i ?>"><button type="button" class="btn btn-outline-danger">Delete</button></a></td>
+                                        <tr>
+                                            <td><?php echo $m ?></td>
+                                            <td><img src="<?php echo $uploadsPath . $rowsProducts['images'] ?>" width='80px' height="100px" alt="sale-shop" style="object-fit: cover" class="border"></td>
+                                            <td><?php echo $rowsProducts['product_id'] ?></td>
+                                            <td><?php echo $rowsProducts['product_name'] ?></td>
+                                            <td><?php echo $price ?></td>
+                                            <td><?php echo $_SESSION["strQty"][$i] ?></td>
+                                            <td><a href="order.php?id=<?php echo $rowsProducts['product_id']  ?>" class="btn btn-outline-primary me-2">+</a>
+                                                <?php if ($_SESSION["strQty"][$i] > 1) : ?>
+                                                    <a href="order_del.php?id=<?php echo $rowsProducts['product_id']  ?>" class="btn btn-outline-danger">-</a>'
+                                                <?php endif ?>
+                                            </td>
+                                            <td><?php echo $sumPrice ?></td>
+                                            <td> <a href="delete_cart.php?id=<?php echo $i ?>"><button type="button" class="btn btn-outline-danger">Delete</button></a></td>
 
 
-                                    </tr>
+                                        </tr>
                             <?php $m =  $m + 1;
-                                }
-                            endfor ?>
+                                    }
+                                endfor;
+                            endif; ?>
                             <tr>
                                 <td colspan="5"></td>
                                 <td colspan="2">Total Price</td>
